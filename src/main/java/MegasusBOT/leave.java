@@ -34,8 +34,9 @@ public class leave {
 		PlayerManager playerManager = PlayerManager.getInstance();
 		GuildMusicManager musicManager = playerManager.getGuildMusicManager(event.getGuild());
 		musicManager.scheduler.queueclear();
-		repeat.repeatsong=false;
-		repeat.repeatqueue=false;
+		for (int i = 0; i < repeat.guild.length; i++)
+			if (event.getGuild() == repeat.guild[i])
+				repeat.guild[i]=null;
 		EmbedBuilder j = new EmbedBuilder();
 		j.setTitle(":wave: Disconnected from your channel");
 		j.setDescription("Bye !!!");

@@ -15,7 +15,9 @@ public class clear{
 				usage.setTitle(":sweat_smile: Specify amount to delete");
 				usage.setDescription("Usage: " + MegasusBOT.prefix + "clear [# of messages]");
 				event.getChannel().sendMessage(usage.build()).queue();
+				return;
 			} else {
+				try{
 				if (Integer.parseInt(args[1]) > 1) {
 					try {
 						List<Message> Messages = event.getChannel().getHistory().retrievePast(Integer.parseInt(args[1]))
@@ -42,6 +44,11 @@ public class clear{
 					error.setColor(0xff3923);
 					error.setTitle(":red_circle:  Minimum 2 messages can be deleted!");
 					error.setDescription("Between: 2-100 messages can be deleted at one time!!!");
+					event.getChannel().sendMessage(error.build()).queue();
+				}}catch(NumberFormatException e){
+					EmbedBuilder error = new EmbedBuilder();
+					error.setColor(0xff3923);
+					error.setTitle(":red_circle:  You used a malformed argument!");
 					event.getChannel().sendMessage(error.build()).queue();
 				}
 			}

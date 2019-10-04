@@ -23,16 +23,12 @@ public class skip {
 			channel.sendMessage("Nothing to skip").queue();
 			return;
 		}
-		if(repeat.repeatsong==true){
-			channel.sendMessage("First stop the repeat!!!!!").queue();
-			return;
-		}
 		BlockingQueue<AudioTrack> queue = musicManager.scheduler.getQueue();
 		if (queue.size() == 0) {
 			channel.sendMessage("Nothing to skip").queue();
 			return;
 		}
-		player.getPlayingTrack().setPosition(player.getPlayingTrack().getDuration() - 1);
+		player.getPlayingTrack().setPosition(player.getPlayingTrack().getDuration());
 		channel.sendMessage("Skipping...").queue();
 	}
 

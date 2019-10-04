@@ -14,8 +14,8 @@ public class volume {
 		int volum = Integer.parseInt(args[1]);
 
 		EmbedBuilder v = new EmbedBuilder();
-		if(volum>20&&!event.getMember().hasPermission(Permission.ADMINISTRATOR)&&event.getMember().getId()=="305359668061011968"){
-			v.setTitle(":cry: Maxim volume for you is 20");
+		if(volum>50&&!event.getMember().hasPermission(Permission.ADMINISTRATOR)&&event.getMember().getId()=="305359668061011968"){
+			v.setTitle(":cry: Maxim volume for you is 50");
 			event.getChannel().sendMessage(v.build()).queue();
 			return;
 		}else{
@@ -27,12 +27,12 @@ public class volume {
 				return;
 			}
 		}
-		if(volum<0){
-			v.setTitle(":x: Volume can be set from 1 to 20");
+		if(volum<1){
+			v.setTitle(":x: Minimum volume is 1");
 			event.getChannel().sendMessage(v.build()).queue();
 			return;
 		}
-		mm.getGuildMusicManager(event.getGuild()).player.setVolume(volum);
+		mm.getGuildMusicManager(event.getGuild()).player.setVolume(volum*2);
 		v.setTitle(":white_check_mark: Volume set to: "+ volum);
 		event.getChannel().sendMessage(v.build()).queue();
 		}catch(NumberFormatException e){

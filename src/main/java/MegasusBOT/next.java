@@ -29,17 +29,11 @@ public class next {
 			return;
 		}
 		
-		if(repeat.repeatsong){
-			EmbedBuilder e = new EmbedBuilder();
-			e.setTitle("I can't see the next song in repeat mod");
-			e.setDescription("please stop the repeat ( "+MegasusBOT.prefix +"repeat song off !!!");
-			channel.sendMessage(e.build()).queue();
-		}
-		
 		if(queue.size()==0){
 			EmbedBuilder e = new EmbedBuilder();
 			e.setTitle("Nothing next , queue is clear");
 			channel.sendMessage(e.build()).queue();
+			return;
 		}
 
 		AudioTrackInfo info = queue.get(0).getInfo();

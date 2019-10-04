@@ -2,7 +2,6 @@ package Music;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Consumer;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
@@ -53,12 +52,12 @@ public class PlayerManager {
 				EmbedBuilder pm = new EmbedBuilder();
 				pm.setTitle(":musical_note: Adding to queue: ");
 				pm.setDescription(track.getInfo().title + "\n");
+				pm.setThumbnail("https://i.ytimg.com/vi/"+trackUrl.substring("https://www.youtube.com/watch?v=".length())+"/hqdefault.jpg");
 				channel.sendMessage(pm.build()).queue();
 				}
 				play(musicManager, track);
 			}
 
-			@SuppressWarnings("unchecked")
 			public void playlistLoaded(AudioPlaylist playlist) {
 				AudioTrack firstTrack = playlist.getSelectedTrack();
 
@@ -70,8 +69,10 @@ public class PlayerManager {
 				pm.setDescription(firstTrack.getInfo().title + " (first track of playlist " + playlist.getName() + ")");
 				channel.sendMessage(pm.build()).queue();
 				play(musicManager, firstTrack);
-
-				playlist.getTracks().forEach((Consumer<? super AudioTrack>) musicManager.scheduler.queue);
+				if(playlist.getTracks().size()>0)
+				for(int i=0;i<playlist.getTracks().size();i++){
+					play(musicManager,playlist.getTracks().get(i));
+				}
 			}
 
 			public void noMatches() {

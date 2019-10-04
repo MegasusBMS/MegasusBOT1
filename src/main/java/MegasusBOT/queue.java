@@ -10,7 +10,6 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
 
 import Music.GuildMusicManager;
 import Music.PlayerManager;
-import Music.TrackScheduler;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -34,15 +33,10 @@ public class queue {
         }
         int trackCount;
         List<AudioTrack> list;
-        if(repeat.repeatsong){
-        	list=TrackScheduler.tracks;
-        	trackCount = Math.min(TrackScheduler.tracks.size(), 20);
-        }else{
         	list = new ArrayList<AudioTrack>(queue);
         	trackCount = Math.min(queue.size(), 20);
-        }
         EmbedBuilder builder = new EmbedBuilder();
-                builder.setTitle("Current Queue (Total: " + (repeat.repeatsong ? queue.size() : list.size())+ ")");
+                builder.setTitle("Current Queue (Total: " + list.size()+ ")");
 
         for (int i = 0; i < trackCount; i++) {
             AudioTrack track = list.get(i);
@@ -56,7 +50,13 @@ public class queue {
         	AudioTrack track = list.get(i);
             duration+=track.getDuration();
         }
-        builder.appendDescription(String.format("\n --------------------------------\n**Duration of the queue:** [%s]",formatTime(duration)));
+        String a ="";
+        for (int i = 0; i < repeat.guild.length; i++) {
+        	if(event.getGuild()==repeat.guild[i]){
+        		a =":repeat: ";
+        	}
+        }
+        builder.appendDescription(String.format("\n --------------------------------\n**Duration of the queue:** [%s] "+a,formatTime(duration)));
         
         channel.sendMessage(builder.build()).queue();
     }

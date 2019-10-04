@@ -11,13 +11,11 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.managers.AudioManager;
 
 public class join {
-
 	public join(GuildMessageReceivedEvent event) {
 		AudioManager am = event.getGuild().getAudioManager();
 		TextChannel tc = event.getChannel();
         PlayerManager mm = PlayerManager.getInstance();
         mm.getGuildMusicManager(event.getGuild()).player.setVolume(10);
-        
 				if(am.isConnected()){
 					if(event.getMember().getVoiceState().inVoiceChannel()){
 						EmbedBuilder j = new EmbedBuilder();

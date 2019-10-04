@@ -1,23 +1,24 @@
 package Music;
 
-import MegasusBOT.commands;
-import MegasusBOT.MegasusBOT;
-import MegasusBOT.Play;
-import MegasusBOT.repeat;
-import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
-import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
-import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
-import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
+import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
+
+import MegasusBOT.MegasusBOT;
+import MegasusBOT.Play;
+import MegasusBOT.commands;
+
 public class TrackScheduler extends AudioEventAdapter {
 	private final AudioPlayer player;
 	public BlockingQueue<AudioTrack> queue;
 	public static List<AudioTrack> tracks;
+	public static boolean start = false;
 
 	public TrackScheduler(AudioPlayer player) {
 		this.player = player;
@@ -56,11 +57,7 @@ public class TrackScheduler extends AudioEventAdapter {
 
 	@Override
 	public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
-		if (endReason.mayStartNext) {
-			if (repeat.repeatsong == true || repeat.repeatqueue == true) {
-				new Play(repeat.song, commands.e, false);
-			}
+		if (endReason.mayStartNext)
 			nextTrack();
-		}
 	}
 }

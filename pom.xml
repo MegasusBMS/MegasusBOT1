@@ -40,7 +40,7 @@
     <dependency>
    	 <groupId>net.dv8tion</groupId>
    	 <artifactId>JDA</artifactId>
-   	 <version>4.0.0_45</version>
+   	 <version>4.0.0_46</version>
 	</dependency>
 	
 	<dependency>
@@ -48,16 +48,20 @@
     <artifactId>google-api-services-youtube</artifactId>
     <version>v3-rev212-1.25.0</version>
 	</dependency>
-	
-	<dependency>
-    <groupId>lol-api</groupId>
-    <artifactId>lol-api</artifactId>
-    <version>0.0.1</version>
+	   
+<dependency>
+    <groupId>com.github.taycaldwell</groupId>
+    <artifactId>riot-api-java</artifactId>
+    <version>4.2.0</version>
 </dependency>
 	
   </dependencies>
   	
   <repositories>
+	<repository>
+	    <id>jitpack.io</id>
+	    <url>https://jitpack.io</url>
+	</repository>
   	<repository>
     <id>jcenter</id>
    	<name>jcenter-bintray</name>
